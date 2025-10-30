@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+    <!-- vTypes：不改 -->
+    <vType id="CV" 
+          length="6.44" 
+          minGap="0" 
+          maxSpeed="13.89" 
+          accel="2.6" 
+          decel="4.5" 
+          sigma="0"
+          color="red"
+          carFollowModel="Krauss"
+          guiShape="passenger"/>
+
+    <vType id="NC" 
+          length="6.44" 
+          minGap="0" 
+          maxSpeed="13.89" 
+          accel="2.6" 
+          decel="4.5" 
+          sigma="0"
+          color="blue"
+          carFollowModel="Krauss"
+          guiShape="passenger"/>
+
+    <!-- 路线：不改 -->
+    <route id="route_lane7_north" edges="lane7 intertonorth"/> 
+
+    <!-- 按 40%/60% 随机分配 CV / NC（合并为单一 flow 时使用） -->
+    <vTypeDistribution id="mixType" vTypes="CV NC" probabilities="0.4 0.6"/>
+
+    <!-- 合并后的混合随机输入（总需求 415 veh/h = 166+249） -->
+    <flow id="mixed_flow_north" 
+          type="mixType" 
+          route="route_lane7_north" 
+          begin="0" 
+          end="61800" 
+          vehsPerHour="415"
+          departLane="0" 
+          departSpeed="max"
+          departPos="base"/>
+</routes>
